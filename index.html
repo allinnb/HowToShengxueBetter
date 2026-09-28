@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高性价比升学指南 · 花掉什么、换回什么、证据有多硬 —— 每个升学决策都算一笔账</title>
+<meta name="description" content="高性价比升学指南：花掉什么、换回什么、证据有多硬 —— 每个升学决策都算一笔账。共 3 条，每条写明成本、收益、证据等级。">
+<style>
+:root{--bg:#faf8f3;--card:#fff;--ink:#222;--mut:#888;--line:#e8e2d6;--acc:#b7792b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+header{text-align:center;padding:28px 0 10px}
+header h1{margin:0;font-size:30px;letter-spacing:2px}
+header p{color:var(--mut);margin:8px 0 0}
+.stats{text-align:center;color:var(--mut);font-size:14px;margin-bottom:18px}
+.toolbar{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+.toolbar .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.toolbar button,.toolbar select,.toolbar input{font-size:14px;padding:7px 12px;border:1px solid var(--line);
+ border-radius:20px;background:#fff;color:var(--ink)}
+.toolbar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.toolbar input[type=search]{flex:1;min-width:160px;border-radius:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+ padding:18px;margin:16px 0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.badge{font-size:12px;padding:3px 10px;border-radius:12px;background:#f0ece1;color:#666}
+.badge.ratio-极高{background:#1a7f4b;color:#fff}
+.badge.ratio-高{background:#e8f3ec;color:#1a7f4b}
+.badge.ratio-一般{background:#f0ece1;color:#666}
+.badge.ev{background:#e8effa;color:#2b5cb7}
+.card h2{margin:6px 0 10px;font-size:19px;line-height:1.5}
+.card h2 .no{color:var(--acc);font-size:14px;margin-right:6px}
+.cost{font-size:14px;color:#555;margin:6px 0}
+.plain{font-size:16px;margin:10px 0;padding:10px 12px;background:#fdf6e3;
+ border-left:3px solid var(--acc);border-radius:0 8px 8px 0}
+details{margin-top:8px}
+summary{cursor:pointer;color:var(--acc);font-size:14px}
+.detail .row{display:flex;gap:10px;margin:10px 0;font-size:14px}
+.detail .label{flex:0 0 88px;color:var(--mut)}
+.detail .val{flex:1}
+.foot{font-size:12px;color:var(--mut);margin-top:12px}
+.empty{text-align:center;color:var(--mut);padding:40px 0;display:none}
+footer{text-align:center;color:var(--mut);font-size:13px;margin-top:36px;line-height:2}
+footer a{color:var(--acc)}
+.method{background:#fff;border:1px dashed var(--line);border-radius:12px;
+ padding:16px;margin:24px 0;font-size:14px;color:#555}
+.method b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>高性价比升学指南</h1><p>花掉什么、换回什么、证据有多硬 —— 每个升学决策都算一笔账</p></header>
+<p class="stats">共 3 条 · 最后更新 2026-09-28 · 每条标明证据等级，查不到就写查不到</p>
+<div class="toolbar">
+  <div class="row" id="ratioRow"><button data-r="" class="on">全部</button><button data-r="高">高</button></div>
+  <div class="row">
+    <select id="catSel"><option value="">全部分类</option><option value="专业选择">专业选择</option><option value="升学路径">升学路径</option></select>
+    <select id="evSel"><option value="">全部证据等级</option><option value="A">A</option></select>
+    <input type="search" id="q" placeholder="搜索：如 复读 / 马来亚 / 选科">
+  </div>
+</div>
+<div class="method"><b>怎么读这本指南：</b>每条只回答两件事 ——
+<b>花掉什么</b>（钱 / 时间 / 精力）、<b>换回什么</b>（分数与录取 / 时间 / 金钱 / 选择权）。
+证据分三级：<b>A</b> = 官方数据或大样本实证，<b>B</b> = 机构数据或单年数据，<b>C</b> = 从业经验。
+<b>性价比是判断不是证据</b>，只算 C 级。政策、分数线带截至日期，请以官方最新公布为准。</div>
+<main id="list">
+<article class="card" data-ratio="高" data-cat="升学路径"
+         data-ev="A" data-text="ls-001 宁波初三先去考强基，填志愿时再决定要不要锁档 升学路径 钱 0（公办校测不收费）/ 时间少（报名 1 天 + 测试半天，中考前不占用大块复习时间）/ 精力些（5 月正值中考冲刺，测试准备会分心） 去考几乎零成本，多拿一条录取通道；真正的决策点不在 5 月考不考，而在 6 月填不填志愿——强基一旦录取就锁档，后面统招、定向分配都不再参加。 
+  - 分数与录取：宁波强基综合分 =（中考投档成绩÷660×100）×30% + 强基测试成绩（满分 100）×70%。测试权重是中考的两倍多，学科素养强但中考容易失手的学生，这是条&quot;换赛道&quot;；中考发挥稳定的学生，等于多一次提前上岸的机会。每人限报 1 个强基项目，另可再报 1 个其他自主招生项目。
+  - 时间：备考测试挤占中考复习时间，是主要隐性成本。
+  - 金钱：无。
+  - 选择权与风险：强基录取在第一批次（7 月初），被录取后不再参加后续批次录取，等于放弃统招和定向分配的选择权，这是整笔账里最大的代价。未被录取则毫无影响，继续走统招。 适用&quot;平时成绩接近目标高中统招线、或有学科特长&quot;的宁波初三学生；纯裸分碾压的学生去考是顺手多条路，备考投入不必多。注意区分：这是中考层面的&quot;高中强基计划&quot;，不是高考后的&quot;高校强基计划&quot;，两者不相干。">
+  <div class="badges"><span class="badge ratio-高">性价比·高</span><span class="badge">升学路径</span>
+  <span class="badge ev">证据 A</span></div>
+  <h2><span class="no">LS-001</span> 宁波初三先去考强基，填志愿时再决定要不要锁档</h2>
+  <p class="cost">💰 钱 0（公办校测不收费）/ 时间少（报名 1 天 + 测试半天，中考前不占用大块复习时间）/ 精力些（5 月正值中考冲刺，测试准备会分心）</p>
+  <p class="plain">去考几乎零成本，多拿一条录取通道；真正的决策点不在 5 月考不考，而在 6 月填不填志愿——强基一旦录取就锁档，后面统招、定向分配都不再参加。</p>
+  <details><summary>展开看完整算账</summary>
+    <div class="detail"><div class="row"><div class="label">算账明细</div><div class="val"><br>  - 分数与录取：宁波强基综合分 =（中考投档成绩÷660×100）×30% + 强基测试成绩（满分 100）×70%。测试权重是中考的两倍多，学科素养强但中考容易失手的学生，这是条&quot;换赛道&quot;；中考发挥稳定的学生，等于多一次提前上岸的机会。每人限报 1 个强基项目，另可再报 1 个其他自主招生项目。<br>  - 时间：备考测试挤占中考复习时间，是主要隐性成本。<br>  - 金钱：无。<br>  - 选择权与风险：强基录取在第一批次（7 月初），被录取后不再参加后续批次录取，等于放弃统招和定向分配的选择权，这是整笔账里最大的代价。未被录取则毫无影响，继续走统招。</div></div><div class="row"><div class="label">证据有多硬</div><div class="val">A（报名/测试/录取规则与计算公式来自 2026 年宁波市教育局直属高中招生政策，经媒体报道；原文请以市教育局官网为准）；C（&quot;去考零成本&quot;&quot;决策点在填志愿&quot;为判断）；TODO（2027 年政策未发布，报名时间、测试权重、660 总分口径都可能变）</div></div><div class="row"><div class="label">原始来源</div><div class="val">2026-05-14 宁波市教育局发布直属高中招生政策（媒体转载）；报名系统：宁波市中考中招系统 https://zkzz.nbedu.net.cn（请以官网最新公布为准）</div></div><div class="row"><div class="label">适用人群与提醒</div><div class="val">适用&quot;平时成绩接近目标高中统招线、或有学科特长&quot;的宁波初三学生；纯裸分碾压的学生去考是顺手多条路，备考投入不必多。注意区分：这是中考层面的&quot;高中强基计划&quot;，不是高考后的&quot;高校强基计划&quot;，两者不相干。</div></div></div>
+  </details>
+  <p class="foot">数据截至：2026 年宁波市直属高中招生政策（2027 年政策尚未发布） ｜ 条目日期：2026-09-28</p>
+</article>
+<article class="card" data-ratio="高" data-cat="升学路径"
+         data-ev="A" data-text="ls-002 出国留学先看一年总账，马来 8 万起步、美国私立 75 万封顶 升学路径 钱多（一年 8–75 万人民币，跨度近 10 倍）/ 时间中（申请准备半年到一年）/ 精力是（语言考试 + 申请季） 留学一年 8 万起步、高的 75 万封顶，差的主要是国家和学校。先定预算，再选国家，最后看学校，顺序反了最容易超支。 
+  - 分数与录取：同等高考分数下，留学可够到的学校排名通常高于国内录取（方向性判断）；马来亚大学 2025 新政后高考约需满分 70%（约 525 分）。
+  - 时间：英国本科 3 年，省一年时间和一年生活费；美加澳一般 4 年。
+  - 金钱：一年总花费（学费 + 生活费）——英国非伦敦普通院校 22–35 万，伦敦/g5 35–55 万；美国公立 30–55 万、私立 50–75 万；澳洲 28–40 万；加拿大 25–40 万；马来西亚公立 8–15 万、私立/国际分校 12–25 万。
+  - 选择权与风险：费用每年涨、汇率波动，预算按&quot;一年总花费 × 学制年数&quot;准备；签证政策变动风险（加拿大 2026 年 9 月起生活费证明门槛上调至 cad 23,448/年）。 只适用于&quot;家庭已备好全程预算&quot;的家庭；预算定完再谈选校。马来亚大学约 525 分门槛为 2025 年 10 月新政口径。">
+  <div class="badges"><span class="badge ratio-高">性价比·高</span><span class="badge">升学路径</span>
+  <span class="badge ev">证据 A</span></div>
+  <h2><span class="no">LS-002</span> 出国留学先看一年总账，马来 8 万起步、美国私立 75 万封顶</h2>
+  <p class="cost">💰 钱多（一年 8–75 万人民币，跨度近 10 倍）/ 时间中（申请准备半年到一年）/ 精力是（语言考试 + 申请季）</p>
+  <p class="plain">留学一年 8 万起步、高的 75 万封顶，差的主要是国家和学校。先定预算，再选国家，最后看学校，顺序反了最容易超支。</p>
+  <details><summary>展开看完整算账</summary>
+    <div class="detail"><div class="row"><div class="label">算账明细</div><div class="val"><br>  - 分数与录取：同等高考分数下，留学可够到的学校排名通常高于国内录取（方向性判断）；马来亚大学 2025 新政后高考约需满分 70%（约 525 分）。<br>  - 时间：英国本科 3 年，省一年时间和一年生活费；美加澳一般 4 年。<br>  - 金钱：一年总花费（学费 + 生活费）——英国非伦敦普通院校 22–35 万，伦敦/G5 35–55 万；美国公立 30–55 万、私立 50–75 万；澳洲 28–40 万；加拿大 25–40 万；马来西亚公立 8–15 万、私立/国际分校 12–25 万。<br>  - 选择权与风险：费用每年涨、汇率波动，预算按&quot;一年总花费 × 学制年数&quot;准备；签证政策变动风险（加拿大 2026 年 9 月起生活费证明门槛上调至 CAD 23,448/年）。</div></div><div class="row"><div class="label">证据有多硬</div><div class="val">A（UKVI/澳洲移民局/IRCC 资金要求、诺丁汉大学马来分校官网学费）；B（IDP、教育在线、启德 2025–2026 年汇总数据）；C（马来西亚生活费留学生实测）；TODO（马来公立校国际生学费官网原文未找到；全部费用数字每年复核）</div></div><div class="row"><div class="label">原始来源</div><div class="val">LSE 官网转述 UKVI 资金要求（2025-10）；IDP《出国留学一年多少钱？（2025更新）》；教育在线《2026 主流国家留学费用详解》（2026-09-21）；诺丁汉大学马来分校官网学费页；启德《加拿大/新西兰/马来西亚留学对比》（2026-09-24）；温哥华港湾转述 IRCC 新规（2026-08-31）。数字每年变，请以各校官网和使馆最新公布为准。</div></div><div class="row"><div class="label">适用人群与提醒</div><div class="val">只适用于&quot;家庭已备好全程预算&quot;的家庭；预算定完再谈选校。马来亚大学约 525 分门槛为 2025 年 10 月新政口径。</div></div></div>
+  </details>
+  <p class="foot">数据截至：2025–2026 学年各国学费与生活费口径（费用每年变，每年复核） ｜ 条目日期：2026-09-28</p>
+</article>
+<article class="card" data-ratio="高" data-cat="专业选择"
+         data-ev="A" data-text="ls-003 出国选专业先定目标，移民看紧缺清单、回国看起薪分化 专业选择 钱中（商科/医学/工程学费通常高于人文社科，方向性）/ 时间少（选专业本身不花时间，但选错中途换方向=多花一到两年）/ 精力是（cs/工程/护理学业强度大） 没有&quot;最有性价比&quot;的专业，只有&quot;对上目标&quot;的专业。想移民看紧缺清单，护理、工程、it 在三国清单里重合度最高；想回国看起薪分化，cs/数据/电子电气对接新质生产力，30% 文科海归起薪不足 6000；想留英国工作，先看 4.17 万英镑工签线再看专业。 
+  - 分数与录取：不适用（选专业不直接换分数）。
+  - 时间：选错专业中途换方向，多花一到两年。
+  - 金钱：美国 nace 2025：计算机科学起薪 $76,251–$82,565，商科平均 $65,276；加拿大统计局：注册护士（女）$73,169，教师教育（女）$48,330；澳洲 qilt 2023 本科中位年薪 a$71,000；英国 cs 应届 £25,789–£40,414。海归回国：10% 顶尖年薪超 40 万，30% 文科海归起薪不足 6000（2025 海归就业力调查）。
+  - 选择权与风险：移民清单每季/每年变动——澳洲 core skills 清单动态调整，加拿大 ee 2026 年起工作经验要求提到 12 个月；英国工签标准线 £41,700 高于多数应届起薪（£26k–£35k），留英的真实瓶颈是拿到雇主担保，不是专业本身。 只适用于&quot;出国目标明确&quot;的家庭；目标不明先排目标顺序再谈专业。马来西亚分专业起薪暂无可靠来源，不写。">
+  <div class="badges"><span class="badge ratio-高">性价比·高</span><span class="badge">专业选择</span>
+  <span class="badge ev">证据 A</span></div>
+  <h2><span class="no">LS-003</span> 出国选专业先定目标，移民看紧缺清单、回国看起薪分化</h2>
+  <p class="cost">💰 钱中（商科/医学/工程学费通常高于人文社科，方向性）/ 时间少（选专业本身不花时间，但选错中途换方向=多花一到两年）/ 精力是（CS/工程/护理学业强度大）</p>
+  <p class="plain">没有&quot;最有性价比&quot;的专业，只有&quot;对上目标&quot;的专业。想移民看紧缺清单，护理、工程、IT 在三国清单里重合度最高；想回国看起薪分化，CS/数据/电子电气对接新质生产力，30% 文科海归起薪不足 6000；想留英国工作，先看 4.17 万英镑工签线再看专业。</p>
+  <details><summary>展开看完整算账</summary>
+    <div class="detail"><div class="row"><div class="label">算账明细</div><div class="val"><br>  - 分数与录取：不适用（选专业不直接换分数）。<br>  - 时间：选错专业中途换方向，多花一到两年。<br>  - 金钱：美国 NACE 2025：计算机科学起薪 $76,251–$82,565，商科平均 $65,276；加拿大统计局：注册护士（女）$73,169，教师教育（女）$48,330；澳洲 QILT 2023 本科中位年薪 A$71,000；英国 CS 应届 £25,789–£40,414。海归回国：10% 顶尖年薪超 40 万，30% 文科海归起薪不足 6000（2025 海归就业力调查）。<br>  - 选择权与风险：移民清单每季/每年变动——澳洲 Core Skills 清单动态调整，加拿大 EE 2026 年起工作经验要求提到 12 个月；英国工签标准线 £41,700 高于多数应届起薪（£26k–£35k），留英的真实瓶颈是拿到雇主担保，不是专业本身。</div></div><div class="row"><div class="label">证据有多硬</div><div class="val">A（NACE、加拿大统计局、QILT、Graduate Outcomes 官方调查）；B（智联 2025 海归报告、ITJobsWatch、EE/ISL 政策媒体转述）；C（&quot;移民性价比最高的一组&quot;为判断）；TODO（HESA/QILT 分专业原表、马来西亚分专业起薪、分专业学费官方数据未找到，不编）</div></div><div class="row"><div class="label">原始来源</div><div class="val">NACE 官网薪资调查；加拿大统计局毕业生收入研究；QILT 全国报告；智联招聘《2025 中国海归就业调查报告》；Davenport Solicitors（英国 Immigration Salary List 2025）。政策变动快，请以各国移民局官网最新公布为准。</div></div><div class="row"><div class="label">适用人群与提醒</div><div class="val">只适用于&quot;出国目标明确&quot;的家庭；目标不明先排目标顺序再谈专业。马来西亚分专业起薪暂无可靠来源，不写。</div></div></div>
+  </details>
+  <p class="foot">数据截至：2024–2026 年各国毕业生薪资调查与移民政策（紧缺清单每年变，每年复核） ｜ 条目日期：2026-09-28</p>
+</article></main>
+<p class="empty" id="empty">没有符合条件的条目，换个筛选试试。</p>
+<footer>《高性价比升学指南》 · 内容持续更新中<br>
+方法论致敬 <a href="https://eternity4719.github.io/HowToLiveBetter/">《高性价比人生指南》</a>（Unlicense 公有领域）</footer>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const cards = [...document.querySelectorAll('.card')];
+const state = {ratio: params.get('ratio') || '', cat: params.get('cat') || '',
+                ev: params.get('ev') || '', q: (params.get('q') || '').toLowerCase()};
+
+document.querySelectorAll('#ratioRow button').forEach(b => {
+  if (b.dataset.r === state.ratio) {
+    document.querySelector('#ratioRow .on').classList.remove('on');
+    b.classList.add('on');
+  }
+  b.onclick = () => { state.ratio = b.dataset.r; sync(); };
+});
+const catSel = document.getElementById('catSel'), evSel = document.getElementById('evSel'),
+      qInput = document.getElementById('q');
+catSel.value = state.cat; evSel.value = state.ev; qInput.value = params.get('q') || '';
+catSel.onchange = () => { state.cat = catSel.value; sync(); };
+evSel.onchange = () => { state.ev = evSel.value; sync(); };
+let t; qInput.oninput = () => { clearTimeout(t);
+  t = setTimeout(() => { state.q = qInput.value.toLowerCase(); sync(); }, 200); };
+
+function sync() {
+  const p = new URLSearchParams();
+  if (state.ratio) p.set('ratio', state.ratio);
+  if (state.cat) p.set('cat', state.cat);
+  if (state.ev) p.set('ev', state.ev);
+  if (state.q) p.set('q', state.q);
+  history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : ''));
+  let n = 0;
+  cards.forEach(c => {
+    const ok = (!state.ratio || c.dataset.ratio === state.ratio)
+      && (!state.cat || c.dataset.cat === state.cat)
+      && (!state.ev || c.dataset.ev === state.ev)
+      && (!state.q || c.dataset.text.includes(state.q));
+    c.style.display = ok ? '' : 'none';
+    if (ok) n++;
+  });
+  document.getElementById('empty').style.display = n ? 'none' : '';
+  document.querySelectorAll('#ratioRow button').forEach(b =>
+    b.classList.toggle('on', b.dataset.r === state.ratio));
+}
+sync();
+</script>
+</body>
+</html>
