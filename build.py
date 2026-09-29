@@ -80,6 +80,11 @@ def main() -> None:
         for k in e["_order"]:
             if k in ("成本", "说人话", "性价比"):
                 continue
+            if k == "附件":
+                detail_rows.append(
+                    f'<div class="row"><div class="label">附件下载</div>'
+                    f'<div class="val"><a href="{esc(f[k])}">完整对照表 PDF</a></div></div>')
+                continue
             label = {"收益": "算账明细", "证据等级": "证据有多硬",
                      "来源": "原始来源", "备注": "适用人群与提醒"}.get(k, k)
             detail_rows.append(
