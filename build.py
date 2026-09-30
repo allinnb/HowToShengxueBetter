@@ -16,9 +16,22 @@ ENTRIES_DIR = ROOT / "entries"
 OUT = ROOT / "index.html"
 
 SITE_TITLE = "高性价比升学指南"
-SITE_SUB = "花掉什么、换回什么、证据有多硬 —— 每个升学决策都算一笔账"
+SITE_SUB = "花掉什么、换回什么、证据有多硬 —— 每个升学、留学与移民决策都算一笔账"
 
 RATIO_ORDER = {"极高": 0, "高": 1, "一般": 2}
+
+# 编号前缀 → 板块：一站三库，导航按板块分区
+SEC_MAP = {"LS": "升学", "LX": "留学", "YM": "移民"}
+SEC_ORDER = ["升学", "留学", "移民"]
+SEC_PREFIX = {"升学": "LS", "留学": "LX", "移民": "YM"}
+
+
+def sec_of(entry: dict) -> str:
+    no = entry.get("编号", "")
+    for p, s in SEC_MAP.items():
+        if no.startswith(p + "-") or no == p:
+            return s
+    return "升学"
 
 
 def parse_entry(path: Path) -> dict:
@@ -88,14 +101,18 @@ def main() -> None:
                     f'<div class="val"><a href="{esc(parts[0])}">{esc(label)}</a></div></div>')
                 continue
             label = {"收益": "算账明细", "证据等级": "证据有多硬",
-                     "来源": "原始来源", "备注": "适用人群与提醒"}.get(k, k)
+                     "来源": "原始来源", "备注": "适用人群与提醒",
+                     "国家/项目": "国家 / 项目", "政策时效": "政策时效"}.get(k, k)
             detail_rows.append(
                 f'<div class="row"><div class="label">{esc(label)}</div>'
                 f'<div class="val">{nl2br(f[k])}</div></div>')
+        sec = sec_of(e)
+        country = f'<span class="badge country">{esc(e.get("国家/项目", ""))}</span>' \
+            if e.get("国家/项目") else ""
         cards.append(f"""
 <article class="card" id="{esc(e.get('编号', ''))}" data-ratio="{esc(ratio)}" data-cat="{esc(e.get('分类', ''))}"
-         data-ev="{esc(e.get('证据等级', ''))}" data-aud="{esc(e.get('人群', ''))}" data-text="{esc(search_text.lower())}">
-  <div class="badges">{badge_ratio}<span class="badge">{esc(e.get('分类', ''))}</span>
+         data-ev="{esc(e.get('证据等级', ''))}" data-aud="{esc(e.get('人群', ''))}" data-sec="{sec}" data-text="{esc(search_text.lower())}">
+  <div class="badges">{badge_ratio}<span class="badge sec">板块·{sec}</span>{country}<span class="badge">{esc(e.get('分类', ''))}</span>
   <span class="badge aud">人群·{esc(e.get('人群', ''))}</span>
   <span class="badge ev">证据 {esc(e.get('证据等级', ''))}</span></div>
   <h2><span class="no">{esc(e.get('编号', ''))}</span> {esc(e.get('标题', ''))}</h2>
@@ -112,17 +129,33 @@ def main() -> None:
     opt_auds = "".join(f'<option value="{esc(a)}">{esc(a)}</option>' for a in auds)
     ratio_btns = '<button data-r="" class="on">全部</button>' + "".join(
         f'<button data-r="{r}">{r}</button>' for r in ratios)
+    sec_btns = '<button data-s="" class="on">全部</button>' + "".join(
+        f'<button data-s="{s}">{s}</button>' for s in SEC_ORDER)
+    sec_counts = {s: sum(1 for e in entries if sec_of(e) == s) for s in SEC_ORDER}
+    stats_line = (f"共 {len(entries)} 条 · " +
+                  " · ".join(f"{s} {sec_counts[s]} 条" for s in SEC_ORDER) +
+                  f" · 最后更新 {esc(latest)} · 每条标明证据等级，查不到就写查不到")
 
-    toc_groups = []
-    for a in auds:
-        items = [e for e in entries if e.get("人群") == a]
-        lis = "".join(
-            f'<li><a href="#{esc(e.get("编号", ""))}"><span class="no">{esc(e.get("编号", ""))}</span> '
-            f'{esc(e.get("标题", ""))}</a></li>' for e in items)
-        toc_groups.append(
-            f'<div class="toc-group"><h3><a href="?aud={esc(a)}" class="toc-aud">{esc(a)}</a>'
-            f'<span class="cnt">{len(items)} 条</span></h3><ul>{lis}</ul></div>')
-    toc = "".join(toc_groups)
+    toc_secs = []
+    for s in SEC_ORDER:
+        sec_entries = [e for e in entries if sec_of(e) == s]
+        if not sec_entries:
+            continue
+        groups = []
+        for a in auds:
+            items = [e for e in sec_entries if e.get("人群") == a]
+            if not items:
+                continue
+            lis = "".join(
+                f'<li><a href="#{esc(e.get("编号", ""))}"><span class="no">{esc(e.get("编号", ""))}</span> '
+                f'{esc(e.get("标题", ""))}</a></li>' for e in items)
+            groups.append(
+                f'<div class="toc-group"><h3><a href="?sec={esc(s)}&aud={esc(a)}" class="toc-aud">{esc(a)}</a>'
+                f'<span class="cnt">{len(items)} 条</span></h3><ul>{lis}</ul></div>')
+        toc_secs.append(
+            f'<div class="toc-sec"><h2 class="toc-sec-h"><a href="?sec={esc(s)}">{s}</a>'
+            f'<span class="cnt">{len(sec_entries)} 条</span></h2>{"".join(groups)}</div>')
+    toc = "".join(toc_secs)
 
     page = f"""<!doctype html>
 <html lang="zh-CN">
@@ -185,13 +218,20 @@ footer a{{color:var(--acc)}}
 .toc li a:hover{{color:var(--acc)}}
 .toc li .no{{color:var(--acc);font-size:12px;margin-right:6px}}
 .badge.aud{{background:#eef3e6;color:#5a7a2b}}
+.badge.sec{{background:#f3e8f5;color:#7a2b8f}}
+.badge.country{{background:#e6f0f5;color:#2b6f8f}}
+.toc-sec{{margin-bottom:18px}}
+.toc-sec-h{{margin:14px 0 6px;font-size:16px}}
+.toc-sec-h a{{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--acc)}}
+.toc-sec-h .cnt{{color:var(--mut);font-size:12px;margin-left:8px;font-weight:normal}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header><h1>{SITE_TITLE}</h1><p>{SITE_SUB}</p></header>
-<p class="stats">共 {len(entries)} 条 · 最后更新 {esc(latest)} · 每条标明证据等级，查不到就写查不到</p>
+<p class="stats">{stats_line}</p>
 <div class="toolbar">
+  <div class="row" id="secRow">{sec_btns}</div>
   <div class="row" id="ratioRow">{ratio_btns}</div>
   <div class="row">
     <select id="audSel"><option value="">全部人群</option>{opt_auds}</select>
@@ -200,7 +240,7 @@ footer a{{color:var(--acc)}}
     <input type="search" id="q" placeholder="搜索：如 复读 / 马来亚 / 选科">
   </div>
 </div>
-<div class="toc" id="toc"><h2>📖 目录 · 按人群找条目</h2>{toc}</div>
+<div class="toc" id="toc"><h2>📖 目录 · 按板块找条目</h2>{toc}</div>
 <div class="method"><b>怎么读这本指南：</b>每条只回答两件事 ——
 <b>花掉什么</b>（钱 / 时间 / 精力）、<b>换回什么</b>（分数与录取 / 时间 / 金钱 / 选择权）。
 证据分三级：<b>A</b> = 官方数据或大样本实证，<b>B</b> = 机构数据或单年数据，<b>C</b> = 从业经验。
@@ -215,8 +255,17 @@ const params = new URLSearchParams(location.search);
 const cards = [...document.querySelectorAll('.card')];
 const state = {{ratio: params.get('ratio') || '', cat: params.get('cat') || '',
                 ev: params.get('ev') || '', aud: params.get('aud') || '',
+                sec: params.get('sec') || '',
                 q: (params.get('q') || '').toLowerCase()}};
+const SEC_PREFIX = {{"升学": "LS", "留学": "LX", "移民": "YM"}};
 
+document.querySelectorAll('#secRow button').forEach(b => {{
+  if (b.dataset.s === state.sec) {{
+    document.querySelector('#secRow .on').classList.remove('on');
+    b.classList.add('on');
+  }}
+  b.onclick = () => {{ state.sec = b.dataset.s; sync(); }};
+}});
 document.querySelectorAll('#ratioRow button').forEach(b => {{
   if (b.dataset.r === state.ratio) {{
     document.querySelector('#ratioRow .on').classList.remove('on');
@@ -236,6 +285,7 @@ let t; qInput.oninput = () => {{ clearTimeout(t);
 
 function sync() {{
   const p = new URLSearchParams();
+  if (state.sec) p.set('sec', state.sec);
   if (state.ratio) p.set('ratio', state.ratio);
   if (state.cat) p.set('cat', state.cat);
   if (state.ev) p.set('ev', state.ev);
@@ -244,7 +294,8 @@ function sync() {{
   history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : ''));
   let n = 0;
   cards.forEach(c => {{
-    const ok = (!state.ratio || c.dataset.ratio === state.ratio)
+    const ok = (!state.sec || c.dataset.sec === state.sec)
+      && (!state.ratio || c.dataset.ratio === state.ratio)
       && (!state.cat || c.dataset.cat === state.cat)
       && (!state.ev || c.dataset.ev === state.ev)
       && (!state.aud || c.dataset.aud === state.aud)
@@ -252,9 +303,18 @@ function sync() {{
     c.style.display = ok ? '' : 'none';
     if (ok) n++;
   }});
-  document.getElementById('empty').style.display = n ? 'none' : '';
+  const emptyEl = document.getElementById('empty');
+  emptyEl.style.display = n ? 'none' : '';
+  if (!n && state.sec && SEC_PREFIX[state.sec]) {{
+    emptyEl.textContent = '「' + state.sec + '」板块暂无条目 —— 在对话里说一句「新增一条 ' +
+      SEC_PREFIX[state.sec] + '」即可入库。';
+  }} else if (!n) {{
+    emptyEl.textContent = '没有符合条件的条目，换个筛选试试。';
+  }}
   document.getElementById('toc').style.display =
-    (state.ratio || state.cat || state.ev || state.aud || state.q) ? 'none' : '';
+    (state.sec || state.ratio || state.cat || state.ev || state.aud || state.q) ? 'none' : '';
+  document.querySelectorAll('#secRow button').forEach(b =>
+    b.classList.toggle('on', b.dataset.s === state.sec));
   document.querySelectorAll('#ratioRow button').forEach(b =>
     b.classList.toggle('on', b.dataset.r === state.ratio));
 }}
